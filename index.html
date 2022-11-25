@@ -39,32 +39,60 @@
 			background-color: white;
 			color: black;
 		}
+		#cars{
+			margin: 3% 0% 0% 5%;
+			width: 15%;
+			padding: 0.3%;
+			font-style: italic;
+			background-color: lightgreen;
+			color: brown;
+			text-align: center;
+		}
 	</style>
 	<h1 id="heads">REGISTRATION FORM</h1>
 	
 	<input id="name" placeholder="enter your name" /></br>
 	<input id="password" placeholder="enter password"/></br>
+	<p>
+		<input type="radio" name="gender" id="male"/>Male
+		<input type="radio" name="gender" id="female"/>Female
+	</p>
+	<select id="cars">
+  <option value="volvo">Volvo</option>
+  <option value="saab">Saab</option>
+  <option value="mercedes">Mercedes</option>
+  <option value="audi">Audi</option>
+</select></br>
 	<button id="sub" onclick="submit()"> submit</button>
-</div>
 	<script type="text/javascript">
 		function submit(){
 			var name=document.getElementById("name").value
 			console.log(name)
 			var password=document.getElementById("password").value
 			console.log(password)
+			var carname=document.getElementById("cars").value
+			console.log(cars)
+			var gmale=document.getElementById("male").checked
+			//console.log(gmale)
+			var gfemale=document.getElementById("female").checked
+			//console.log(gfemale)
+
+			if(gmale==true)var gender="male" 
+			else var gender="female"
+			console.log(gender)
 
 		fetch("http://localhost:3000/newData",{
 			method:"POST",
 			headers:{
 				"content-type":"application/json"
 			},
-			body:JSON.stringify({name:name,password:password}
+			body:JSON.stringify({name:name,password:password,carname:cars}
 				)
 
 		})
 		.then((res)=>{
 			console.log(res)
-			if(res,status===200)
+			if(res.status===200)
 				alert("Registration successful")
 		})
 		.catch((err)=>{
